@@ -1,14 +1,18 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+--local QBCore = exports['qb-core']:GetCoreObject()
 
-QBCore.Functions.TriggerCallback('qb-car-music:GetMusic', function(source,cb)
+--[[QBCore.Functions.TriggerCallback('qb-car-music:GetMusic', function(source,cb)
     cb(Config.Zones)
+end)]]--
+
+lib.callback.register('qb-car-music:GetMusic', function(source)
+	return Config.Zones
 end)
 
-if Config.ItemInVehicle then
+--[[if Config.ItemInVehicle then
 	QBCore.Functions.CreateUseableItem(Config.ItemInVehicle, function(playerId)
 		TriggerClientEvent("qb-car-music:ShowNui",playerId)
 	end)
-end
+end]]--
 
 local xSound = exports.xsound
 

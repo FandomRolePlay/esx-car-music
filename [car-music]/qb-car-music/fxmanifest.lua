@@ -18,6 +18,10 @@ files {
 	'html/main.css',
 }
 
+shared_scripts {
+	'@ox_lib/init.lua'
+}
+
 server_scripts {
   'config.lua',
   'server/main.lua',

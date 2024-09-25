@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local ESX = exports['es_extended']:getSharedObject()
 
 local Music = {}
 local datasoundinfo = {}
@@ -9,17 +9,30 @@ local nomidaberto
 local SoundsPlaying = {}
 
 
-Citizen.CreateThread(function() 
+--[[Citizen.CreateThread(function() 
 	Wait(500)
 	while QBCore.Functions.GetPlayerData().job == nil do
        	Citizen.Wait(10)
     end
 	myjob = QBCore.Functions.GetPlayerData().job
 	TriggerServerEvent("qb-car-music:GetDate")
+end)]]--
+
+Citizen.CreateThread(function()
+	Wait(500)
+	while ESX.GetPlayerData().job == nil do
+	   	Citizen.Wait(10)
+	end
+	myjob = ESX.GetPlayerData().job
+	TriggerServerEvent("qb-car-music:GetDate")
 end)
 
-RegisterNetEvent('QBCore:Client:OnJobUpdate')  
+--[[RegisterNetEvent('QBCore:Client:OnJobUpdate')  
 AddEventHandler('QBCore:Client:OnJobUpdate', function(job)
+	myjob = job
+end)]]--
+
+RegisterNetEvent('esx:setJob', function(job)
 	myjob = job
 end)
 
@@ -281,7 +294,13 @@ function show(nomecenas)
 			data = datasoundinfo
         })
     else
-		QBCore.Functions.Notify("~r~You can't do this right now")
+		--QBCore.Functions.Notify("~r~You can't do this right now")
+		lib.notify({
+			title = 'Error',
+			text = 'You can\'t do this right now',
+			icon = "fas fa-exclamation-circle",
+			type = 'error',
+		})
 	end
 end
 
